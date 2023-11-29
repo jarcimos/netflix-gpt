@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LOGO, USER_AVATAR } from '../utils/constants';
 import { auth } from '../utils/firebase';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeUser } from '../utils/userSlice';
+import { addUser, removeUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 
 const Header = () => {
@@ -13,16 +13,23 @@ const Header = () => {
     const navigate = useNavigate();
     const userSelector = useSelector(state => state.user)
 
-    console.log('sele', userSelector)
-    
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+              const {uid, email, displayName, photoURL } = user;
+              dispatch(addUser({uid: uid, email:email, displayName: displayName, photoURL: photoURL}));
+              navigate('/browse')
+            } else {
+              dispatch(removeUser());
+              navigate('/')
+            }
+          });
+
+          return () => unsubscribe();
+    }, [])
 
     const handleSignOut = () => {
-        signOut(auth).then(() => {
-            // dispatch(removeUser());
-            navigate('/');
-          }).catch((error) => {
-            
-          });
+        signOut(auth).then(() => { }).catch((error) => { });
     }
 
 

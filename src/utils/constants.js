@@ -7,3 +7,12 @@ export const BG_URL =
 
 export const USER_AVATAR =
   "https://occ-0-6247-2164.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABdpkabKqQAxyWzo6QW_ZnPz1IZLqlmNfK-t4L1VIeV1DY00JhLo_LMVFp936keDxj-V5UELAVJrU--iUUY2MaDxQSSO-0qw.png?r=e6e";
+
+
+export const API_OPTIONS = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNGU1ZWNiNjgwYWJjZGEyZWI2M2I2NjYyMzA0OGE5OCIsInN1YiI6IjY1NjVmYWQ4ZDk1NDIwMDBjNDFmM2Y4ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kFcsByzn9RgG8zMEMgZFaiHrcsuSuMeHBAlKq3vfHCk'
+    }
+  };

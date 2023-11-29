@@ -1,12 +1,17 @@
-import React from 'react'
-import Header from './Header'
+import React, { useEffect } from 'react';
+import Header from './Header';
+import useNowPlayingMoviesApi from '../hooks/useNowPlayingMoviesApi';
+import MainContainer from './MainContainer';
 
 const Browse = () => {
+
+useNowPlayingMoviesApi();
+
   return (
     
     <div>
         <Header />
-        <h1 className='m-auto'>Browse</h1>
+        <MainContainer />
     </div>
   )
 }
