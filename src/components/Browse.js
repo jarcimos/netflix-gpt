@@ -4,18 +4,23 @@ import useNowPlayingMoviesApi from '../hooks/useNowPlayingMoviesApi';
 import MainContainer from './MainContainer';
 import SecondaryContainer from './SecondaryContainer';
 import usePopularMoviesApi from '../hooks/usePopularMoviesApi';
+import GptSearch from './GptSearch';
+import { useSelector } from 'react-redux';
 
 const Browse = () => {
+    const gptToggle = useSelector(state => state.gpt.showGptSearch);
 
-useNowPlayingMoviesApi();
-usePopularMoviesApi();
+    useNowPlayingMoviesApi();
+    usePopularMoviesApi();
 
   return (
     
     <div>
         <Header />
-        <MainContainer />
-        <SecondaryContainer />
+        { gptToggle ? <GptSearch /> : (<><MainContainer />
+        <SecondaryContainer /></>)
+        }
+        
     </div>
   )
 }

@@ -20,7 +20,7 @@ const useMovieTrailer = (movieId) => {
         const filterTrailers = json.results.filter(item => item.type === "Trailer");
         const trailer = filterTrailers[0];
         dispatch(addTrailerVideo(trailer))
-        // console.log('json',  json, trailer, movieId)
+        
     }
 
     useEffect(() => {
