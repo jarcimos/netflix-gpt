@@ -17,12 +17,18 @@ const Browse = () => {
     
     <div>
         <Header />
-        { gptToggle ? <GptSearch /> : (<><MainContainer />
-        <SecondaryContainer /></>)
+        { gptToggle ? (
+            <GptSearch />
+            ) : (
+            <>
+                <MainContainer />
+                <SecondaryContainer />
+            </>
+            )
         }
         
     </div>
-  )
-}
+  );
+};
 
 export default Browse

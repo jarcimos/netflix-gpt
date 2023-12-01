@@ -13,7 +13,7 @@ const Header = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userSelector = useSelector(state => state.user);
+    const user = useSelector(state => state.user);
     const showGptSearch = useSelector(state => state.gpt.showGptSearch);
      
 
@@ -52,36 +52,37 @@ const Header = () => {
 
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
-        <div className='w-1/6 relative px-8 py-2 '>
-            <img src={LOGO} alt='logo'/>
-        </div>
-        
-        <div className='flex mr-8 gap-4 relative'>
-        {showGptSearch && <select
-              className="p-2 m-2 bg-gray-900 text-white h-1/2"
-              onChange={handleLanguageChange}
+            <img src={LOGO} alt='logo' className='w-44 mx-auto md:mx-0'/>
+        {user && (
+          <div className='flex p-2 justify-between'>
+          {showGptSearch && <select
+                className="p-2 m-2 bg-gray-900 text-white"
+                onChange={handleLanguageChange}
+              >
+                {SUPPORTED_LANGUAGES.map((lang) => (
+                  <option key={lang.identifier} value={lang.identifier}>
+                    {lang.name}
+                  </option>
+                ))}
+          </select>}
+          
+          <button
+              className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
+              onClick={handleGptSearchClick}
             >
-              {SUPPORTED_LANGUAGES.map((lang) => (
-                <option key={lang.identifier} value={lang.identifier}>
-                  {lang.name}
-                </option>
-              ))}
-        </select>}
+              {showGptSearch ? "Homepage" : "GPT Search"}
+            </button>
+              
+              <img src={user.photoURL} alt='usericon' className='hidden md:block w-12 h-12 mr-5'/>
+              
+              {/* <p className='text-white font-semibold'>{user.displayName}</p> */}
+              <button 
+                  className="font-bold text-white"
+                  onClick={handleSignOut} >Sign Out</button>
+          </div>
+        )}
         
-        <button
-            className="py-1 px-4 mx-4 my-1 bg-purple-800 text-white rounded-lg h-1/2"
-            onClick={handleGptSearchClick}
-          >
-            {showGptSearch ? "Homepage" : "GPT Search"}
-          </button>
-            {!userSelector ? <img src={USER_AVATAR} alt='usericon' className='w-12 h-12'/> : 
-                <img src={userSelector.photoURL} alt='usericon' className='w-12 h-12'/>}
-            {userSelector && 
-                <p className='text-white font-semibold'>{userSelector.displayName}</p>}
-            <button 
-                className='bg-red-800 px-4 py-1 text-white rounded-md font-semibold h-1/2'
-                onClick={handleSignOut} >Sign Out</button>
-        </div>
+        
 
     </div>
   )

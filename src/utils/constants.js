@@ -24,3 +24,6 @@ export const API_OPTIONS = {
     { identifier: "ua", name: "Ukrainian" },
     { identifier: "spanish", name: "Spanish" },
   ];
+
+
+  export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY
