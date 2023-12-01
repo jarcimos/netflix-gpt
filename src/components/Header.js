@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { toggleGptSearchView } from '../utils/gptSlice';
+import { clearMovieNames, clearMovieResults, toggleGptSearchView } from '../utils/gptSlice';
 import { changeLanguage } from '../utils/configSlice';
 
 
@@ -38,7 +38,9 @@ const Header = () => {
     }
 
     const handleGptSearchClick = () => {
-      dispatch(toggleGptSearchView())
+      dispatch(toggleGptSearchView());
+      dispatch(clearMovieNames());
+      dispatch(clearMovieResults());
     }
 
 
