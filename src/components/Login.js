@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Header from './Header';
-import { BG_URL } from '../utils/constants';
+import { BG_URL, USER_AVATAR } from '../utils/constants';
 import { validateData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
@@ -30,7 +30,7 @@ const Login = () => {
                     const user = userCredential.user;
                     updateProfile(user, {
                         displayName: name.current.value, 
-                        photoURL: "https://lh3.googleusercontent.com/a/ACg8ocII6r_QdbiKchS2siHOFMh-WX1NelZ0fOj1V91EjR-PteA=s192-c-rg-br100"
+                        photoURL: USER_AVATAR,
                       }).then(() => {
                         const {uid, email, displayName, photoURL } = auth.currentUser;
                         dispatch(addUser({uid: uid, email:email, displayName: displayName, photoURL: photoURL}));
@@ -68,7 +68,7 @@ const Login = () => {
     <div className='bg-pink'>
         <Header />
        <div className='absolute'>
-            <img className="h-screen object-cover" src={BG_URL} alt='background image'/>
+            <img className=" object-cover" src={BG_URL} alt='background image'/>
        </div>
        <form 
         onSubmit={(e) => e.preventDefault() }
